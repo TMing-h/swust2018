@@ -1,0 +1,24 @@
+消息框：
+int ret=JOptionPane.showOptionDialog(null,"已经打开的文件尚未保存，需要保存吗？","提示",JOptionPane.YES_NO_CANCEL_OPTION,JOptionPane.WARNING_MESSAGE,null,null,null);
+
+ret返回结果:
+JOptionPane.CANCEL_OPTION	//取消（Cancel）按钮按下
+JOptionPane.NO_OPTION		//No按钮按下
+JOptionPane.YES_OPTION		//YES按钮按下
+
+文件选择窗体：
+JFileChooser
+JFileChooser jfc = new JFileChooser();
+jfc.showSaveDialog(父窗体);//显示保存文件选择窗体
+jfc.showOpenDialog(父窗体);//显示打开文件选择窗体
+File curFile = jfc.getSelectedFile();//得到选择的文件
+
+
+
+保存时获取文件名：
+打开，源：获取用户输入，
+目的地：文本框。
+创建流。
+
+状态判断：有无文件名，是否已编辑。
+共4种状态0，1，2，3
