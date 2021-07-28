@@ -1,0 +1,49 @@
+		漏洞：
+		弱口令
+HTML注入	   SQL注入	   文件读取	代码注入
+XSS跨站		   逻辑漏洞	   文件上传	命令执行
+CSRF客户端请求伪造	   越权漏洞	   文件包含	威胁情报
+SSRF服务端请求伪造    未授权访问	   文件下载
+
+逻辑漏洞：网站业务方面的缺陷
+两个重点：业务流程
+	抓包改包(burpsuite)
+漏洞分类：见截图
+1.密码找回：
+(1)找回链接：
+http://www.baidu.com/getpass.php?email=邮箱地址（只要知道绑定邮箱，就能随意更改密码）
+(2)验证码：
+1234（纯数字）  用burp爆破
+
+2.支付漏洞：
+抓包--搜索金额--修改金额
+
+3.越权：（越级）--平行关系
+修改包中id等，访问，修改他人信息
+
+4.未授权访问：
+未经身份验证 访问他人信息
+关键词：inurl:/admin/main.html：可搜得未授权网站--直接访问后台（禁用JS）
+对于/admin 可用御剑扫描 maybe会有main.html
+
+5.文件读取：
+url中：?file=
+fopen(文件名，"模式")--打开文件或url
+fread(变量，读取字节）--读取文件      filesize()取得文件大小 返回Int
+<?php
+$filename=$_GET['file'];
+$file=fopen($filename,"r");
+$text=fread($file,filesize($filename));
+echo $text;
+?>
+
+6.文件下载：(下载文件的链接）
+url中：?file=
+
+
+
+
+
+
+通用漏洞：0day
+
